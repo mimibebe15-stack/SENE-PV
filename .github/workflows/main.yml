@@ -37,17 +37,18 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-
-    - name: Conceder permisos de ejecucion a Gradle
-      run: chmod +x android/gradlew
+      - name: Conceder permisos de ejecucion a Gradle
+      run: chmod +x android/app/gradlew || chmod +x android/gradlew || true
 
     - name: Compilar archivo APK limpio
       run: |
-        cd android
-        ./gradlew assembleDebug
+        cd android/app && ./gradlew assembleDebug || cd android && ./gradlew assembleDebug
 
     - name: Subir APK final como artefacto descargable
       uses: actions/upload-artifact@v4
       with:
         name: App-Corregida-WhatsApp
-        path: android/app/build/outputs/apk/debug/app-debug.apk
+        path: |
+          android/app/build/outputs/apk/debug/app-debug.apk
+          android/build/outputs/apk/debug/app-debug.apk
+
