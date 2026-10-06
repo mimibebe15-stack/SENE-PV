@@ -37,7 +37,7 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-      - name: Conceder permisos de ejecucion a Gradle
+         - name: Conceder permisos de ejecucion a Gradle
       run: chmod +x android/app/gradlew || chmod +x android/gradlew || true
 
     - name: Compilar archivo APK limpio
@@ -51,4 +51,3 @@ jobs:
         path: |
           android/app/build/outputs/apk/debug/app-debug.apk
           android/build/outputs/apk/debug/app-debug.apk
-
