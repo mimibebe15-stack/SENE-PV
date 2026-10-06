@@ -1,0 +1,6 @@
+{
+  "appId": "com.senepv.app",
+  "appName": "SENE-PV",
+  "webDir": "assets/public",
+  "bundledWebRuntime": false
+}
