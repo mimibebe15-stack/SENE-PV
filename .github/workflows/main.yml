@@ -20,7 +20,9 @@ jobs:
         node-version: 20
 
     - name: Instalar dependencias del proyecto
-      run: npm install
+      run: |
+        npm install
+        npm install @capacitor/android@6.0.4
 
     - name: Crear carpeta assets obligatoria de Capacitor
       run: mkdir -p android/app/src/main/assets && echo "{}" > android/app/src/main/assets/capacitor.plugins.json
