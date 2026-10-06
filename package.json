@@ -1,0 +1,14 @@
+{
+  "name": "sene-pv",
+  "version": "1.0.0",
+  "description": "SENE Punto de Venta",
+  "main": "index.js",
+  "dependencies": {
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/filesystem": "^6.0.0",
+    "@capacitor/share": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  }
+}
