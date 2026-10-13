@@ -1,0 +1,76 @@
+name: Compilar APK SENE PV
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Preparar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Preparar aplicación Android
+        run: |
+          npm run prepare:web
+          npx cap add android
+          npx cap sync android
+          mkdir -p android/app/src/main/res/mipmap-xxxhdpi
+          mkdir -p android/app/src/main/res/xml
+          mkdir -p android/app/src/main/java/com/sene/puntodeventas2026
+          cp assets/sene-pv-icon.png android/app/src/main/res/mipmap-xxxhdpi/sene_pv_launcher.png
+          cp native/file_paths.xml android/app/src/main/res/xml/sene_file_paths.xml
+          cp native/MainActivity.java android/app/src/main/java/com/sene/puntodeventas2026/MainActivity.java
+          cp native/InventoryFilePlugin.java android/app/src/main/java/com/sene/puntodeventas2026/InventoryFilePlugin.java
+          perl -0pi -e 's|<application|<uses-permission android:name="android.permission.CAMERA" />\n    <uses-permission android:name="android.permission.VIBRATE" />\n    <application|' android/app/src/main/AndroidManifest.xml
+          perl -0pi -e 's|android:icon="@mipmap/ic_launcher"|android:icon="@mipmap/sene_pv_launcher" android:roundIcon="@mipmap/sene_pv_launcher"|' android/app/src/main/AndroidManifest.xml
+          perl -0pi -e 's|</application>|<provider android:name="androidx.core.content.FileProvider" android:authorities="com.sene.puntodeventas2026.fileprovider" android:exported="false" android:grantUriPermissions="true"><meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/sene_file_paths" /></provider></application>|' android/app/src/main/AndroidManifest.xml
+          grep -q "registerPlugin(InventoryFilePlugin.class)" android/app/src/main/java/com/sene/puntodeventas2026/MainActivity.java
+
+      - name: Firmar y compilar APK de producción
+        working-directory: android
+        run: |
+          SIGNING_PASS=$(openssl rand -hex 24)
+          keytool -genkeypair -keystore app/sene-pv-release.keystore -storepass "$SIGNING_PASS" -keypass "$SIGNING_PASS" -alias sene-pv -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=SENE Punto de Ventas, OU=SENE, O=SENE, L=Guadalajara, ST=Jalisco, C=MX"
+          cat >> app/build.gradle <<EOF
+
+          android {
+              signingConfigs {
+                  release {
+                      storeFile file('sene-pv-release.keystore')
+                      storePassword '$SIGNING_PASS'
+                      keyAlias 'sene-pv'
+                      keyPassword '$SIGNING_PASS'
+                  }
+              }
+              buildTypes {
+                  release {
+                      signingConfig signingConfigs.release
+                  }
+              }
+          }
+          EOF
+          ./gradlew assembleRelease
+
+      - name: Guardar APK para descargar
+        uses: actions/upload-artifact@v4
+        with:
+          name: SENE-PV-APK-Produccion
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error

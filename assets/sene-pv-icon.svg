@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">SENE/P.V</title>
+  <rect width="512" height="512" rx="112" fill="#0f766e"/>
+  <rect x="54" y="54" width="404" height="404" rx="78" fill="#115e59"/>
+  <path d="M171 152h179c18 0 32 14 32 32v144c0 18-14 32-32 32H171c-18 0-32-14-32-32V184c0-18 14-32 32-32Z" fill="#ecfdf5"/>
+  <path d="M168 217h184M168 256h184M168 295h184" stroke="#99f6e4" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="204" cy="338" r="20" fill="#0f766e"/><circle cx="308" cy="338" r="20" fill="#0f766e"/>
+  <text x="256" y="116" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" letter-spacing="1" fill="#ffffff">SENE/P.V</text>
+  <text x="256" y="277" text-anchor="middle" font-family="Arial, sans-serif" font-size="71" font-weight="800" fill="#0f766e">PV</text>
+</svg>
