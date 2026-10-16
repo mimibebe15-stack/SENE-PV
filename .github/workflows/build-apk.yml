@@ -41,7 +41,7 @@ jobs:
           cp native/InventoryFilePlugin.java android/app/src/main/java/com/sene/puntodeventas2026/InventoryFilePlugin.java
           perl -0pi -e 's|<application|<uses-permission android:name="android.permission.CAMERA" />\n    <uses-permission android:name="android.permission.VIBRATE" />\n    <application|' android/app/src/main/AndroidManifest.xml
           perl -0pi -e 's|android:icon="@mipmap/ic_launcher"|android:icon="@mipmap/sene_pv_launcher" android:roundIcon="@mipmap/sene_pv_launcher"|' android/app/src/main/AndroidManifest.xml
-          perl -0pi -e 's|</application>|<provider android:name="androidx.core.content.FileProvider" android:authorities="com.sene.puntodeventas2026.fileprovider" android:exported="false" android:grantUriPermissions="true"><meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/sene_file_paths" /></provider></application>|' android/app/src/main/AndroidManifest.xml
+          perl -0pi -e 's|</application>|<provider android:name="androidx.core.content.FileProvider" android:authorities="com.sene.puntodeventas2026.fileprovider" android:exported="false" android:grantUriPermissions="true"><meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="\@xml/sene_file_paths" /></provider></application>|' android/app/src/main/AndroidManifest.xml
           grep -q "registerPlugin(InventoryFilePlugin.class)" android/app/src/main/java/com/sene/puntodeventas2026/MainActivity.java
 
       - name: Compilar APK instalable
