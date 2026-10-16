@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="SENE Punto de Ventas">
+  <rect width="512" height="512" rx="108" fill="#0f766e"/>
+  <rect x="30" y="30" width="452" height="452" rx="88" fill="#115e59" stroke="#5eead4" stroke-width="5"/>
+  <path d="M128 177h39l23 127h178l25-89H192" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="27"/>
+  <circle cx="223" cy="358" r="21" fill="#fbbf24"/>
+  <circle cx="343" cy="358" r="21" fill="#fbbf24"/>
+  <path d="M220 236h140M215 271h133" stroke="#5eead4" stroke-linecap="round" stroke-width="12"/>
+  <text x="256" y="104" fill="#fff" font-family="Arial, sans-serif" font-size="42" font-weight="700" text-anchor="middle">SENE</text>
+  <text x="256" y="430" fill="#ccfbf1" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle">PUNTO DE VENTAS</text>
+</svg>
