@@ -7,12 +7,12 @@ import android.util.Base64;
 
 import androidx.core.content.FileProvider;
 
-import com.getcapacitor.ActivityCallback;
+import com.getcapacitor.ActivityResult;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
-import com.getcapacitor.activity.ActivityResult;
+import com.getcapacitor.annotation.ActivityCallback;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 import java.io.File;
@@ -76,7 +76,7 @@ public class InventoryFilePlugin extends Plugin {
       intent.setType("application/json");
       intent.putExtra(Intent.EXTRA_STREAM, uri);
       intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-      startActivity(Intent.createChooser(intent, "Enviar inventario SENE/P.V"));
+      getActivity().startActivity(Intent.createChooser(intent, "Enviar inventario SENE/P.V"));
       call.resolve();
     } catch (Exception error) {
       call.reject("No se pudo compartir el inventario", error);
