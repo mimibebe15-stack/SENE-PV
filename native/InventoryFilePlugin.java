@@ -60,6 +60,7 @@ public class InventoryFilePlugin extends Plugin {
   public void share(PluginCall call) {
     String filename = call.getString("filename");
     String data = call.getString("data");
+    String mimeType = call.getString("mimeType", "application/octet-stream");
     if (filename == null || data == null) {
       call.reject("Falta el archivo de inventario");
       return;
@@ -73,7 +74,7 @@ public class InventoryFilePlugin extends Plugin {
       output.close();
       Uri uri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", file);
       Intent intent = new Intent(Intent.ACTION_SEND);
-      intent.setType("application/json");
+      intent.setType(mimeType);
       intent.putExtra(Intent.EXTRA_STREAM, uri);
       intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
       getActivity().startActivity(Intent.createChooser(intent, "Enviar inventario SENE/P.V"));
