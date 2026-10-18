@@ -8,9 +8,9 @@
   "lang": "es-MX",
   "icons": [
     {
-      "src": "assets/sene-pv-icon.png",
+      "src": "assets/sene-pv-launcher-v2.svg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]
