@@ -26,6 +26,9 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
+      - name: Validar flujo de inventario y ventas
+        run: node scripts/logic-smoke-test.js
+
       - name: Preparar convertidor del ícono
         run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
 
@@ -38,7 +41,7 @@ jobs:
           mkdir -p android/app/src/main/res/mipmap-xxxhdpi
           mkdir -p android/app/src/main/res/xml
           mkdir -p android/app/src/main/java/com/sene/puntodeventas2026
-          rsvg-convert --width 512 --height 512 assets/sene-pv-launcher-v2.svg -o android/app/src/main/res/mipmap-xxxhdpi/sene_pv_launcher.png
+          rsvg-convert --width 512 --height 512 assets/sene-pv-launcher-v3.svg -o android/app/src/main/res/mipmap-xxxhdpi/sene_pv_launcher.png
           cp native/file_paths.xml android/app/src/main/res/xml/sene_file_paths.xml
           cp native/MainActivity.java android/app/src/main/java/com/sene/puntodeventas2026/MainActivity.java
           cp native/InventoryFilePlugin.java android/app/src/main/java/com/sene/puntodeventas2026/InventoryFilePlugin.java
